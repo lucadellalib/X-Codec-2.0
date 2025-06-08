@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=codec
 #SBATCH --time=168:00:00 
-#SBATCH --nodes=5
+#SBATCH --nodes=1
 #SBATCH --gpus-per-node=8  
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=28  
