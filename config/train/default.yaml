@@ -1,6 +1,6 @@
 trainer:
   accelerator: 'gpu'
-  num_nodes: 5
+  num_nodes: 1
   devices: 8
   min_steps: 3000000
   max_steps: 3000000
