@@ -62,7 +62,7 @@ class XCodec2Model(PreTrainedModel):
         wav = torch.nn.functional.pad(wav, (0, pad_for_wav))
 
         input_features = self.feature_extractor(
-            F.pad(wav[0, :].cpu(), (160, 160)),
+            F.pad(wav.cpu(), (160, 160)).unbind(),
             sampling_rate=sample_rate,
             return_tensors="pt",
         ).input_features.to(
@@ -112,7 +112,7 @@ class XCodec2Model(PreTrainedModel):
         wav = torch.nn.functional.pad(wav, (0, pad_for_wav))
 
         input_features = self.feature_extractor(
-            F.pad(wav[0, :].cpu(), (160, 160)),
+            F.pad(wav.cpu(), (160, 160)).unbind(),
             sampling_rate=sample_rate,
             return_tensors="pt",
         ).input_features.to(
@@ -164,7 +164,7 @@ class XCodec2Model(PreTrainedModel):
             wav = torch.nn.functional.pad(wav, (0, pad_for_wav))
 
             input_features = self.feature_extractor(
-                F.pad(wav[0, :].cpu(), (160, 160)),
+                F.pad(wav.cpu(), (160, 160)).unbind(),
                 sampling_rate=sample_rate,
                 return_tensors="pt",
             ).input_features.to(
@@ -269,7 +269,7 @@ if __name__ == "__main__":
     model_path = "HKUST-Audio/xcodec2"
     model = XCodec2Model.from_pretrained(model_path)
     model.eval()
-    x = torch.randn(1, 16000)
+    x = torch.randn(2, 16000)
     toks = model.encode_code(x)
     rec_x = model.decode_code(toks)
     print(model)
